@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Clone the wifi connect repo (bash script)
+
+git clone https://github.com/balena-io/wifi-connect.git && cd wifi-connect
+
 # Login into balenCloud Prod
 
 balena login --token "${BALENA_API_KEY}"
@@ -8,22 +12,22 @@ balena login --token "${BALENA_API_KEY}"
 
 balena app create wifi-connect -t raspberrypi3
 
-# From the wifi-connect app dashboard, add a new device and select Production as the OS edition and Ethernet only (CLI).
+# Download the OS variant to be tested to a temporary image file
 
-balena device init -a wifi-connect -y --os-version x.y.z-prod
+balena os download raspberrypi3 -o /tmp/raspberrypi3.img --version v2.60.1+rev1.prod
 
-# Extract the downloaded image file (skip this step for Edison images) (not required if using device init above)
+# Configure the OS image and add the image to the wifi-connect app with ETHERNET ONLY
 
-unzip <the_image_you_downloaded> (bash script)
+balena os configure /tmp/raspberrypi3.img -a wifi-connect --config-network ethernet
 
-#  Clone the wifi connect repo (bash script)
-
-git clone https://github.com/balena-io/wifi-connect.git && cd wifi-connect
-
-# Push two releases to your app (bash script/cli)
+# Push one release to the wifi-connect app
 
 balena push wifi-connect
 
-balena preload ~/.balena/cache/<the_image_you_downloaded> --app wifi-connect --pin-device-to-release -c current
+# Preload the configured OS image and pin the release to current (the release from the previous push command)
+
+balena preload /tmp/raspberrypi3.img -a wifi-connect --pin-device-to-release -c current
+
+# Push a second release to the wifi-connect app
 
 balena push wifi-connect
