@@ -9,7 +9,10 @@ Spec: https://docs.google.com/document/d/1DXns8pgaqH-WIMEk_ABcks6SqYWi0PiG5eWmOE
 
 ## Instructions to run
 
-TBD
+1. Clone
+2. balena push <APP_NAME>
+3. flash firmata
+4. set fin overlay
 
 ## Instructions to deploy
 

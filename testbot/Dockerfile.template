@@ -1,0 +1,15 @@
+FROM node:12
+
+
+COPY . /usr/src/testbot
+WORKDIR /usr/src/testbot
+RUN npm install -g typescript@4.0.5
+RUN npm install
+RUN tsc --version
+RUN tsc
+
+
+EXPOSE 8080
+
+RUN chmod +x /usr/src/testbot/entry.sh
+ENTRYPOINT [ "/usr/src/testbot/entry.sh"]

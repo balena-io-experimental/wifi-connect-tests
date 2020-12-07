@@ -1,0 +1,7 @@
+[Scenario]
+ExecStopSucess=../logic/scripts/test-done.sh
+ExecStopFail=../logic/scripts/test-done.sh
+Name=Quick test
+Description=quick test inside container
+Tests=quick-test
+Timeout=60
