@@ -1,0 +1,42 @@
+# Fin image contains → 1 container (Exclave Testing) →  Exclave (requires rust), node, NPM, codecept, balenaSDK, testbotSDK, balenaCLI, credentials for the CLI and NPM token in secrets
+
+FROM scratch
+
+
+
+
+# Ryan's past exclave Dockerfile
+# FROM rust:1.31
+
+# RUN apt-get update 
+# RUN apt-get install -y --no-install-recommends git ca-certificates wget
+# RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# RUN git clone https://github.com/exclave/exclave /usr/src/exclave/ \
+#     && cd /usr/src/exclave
+# #    && git checkout v0.2.5
+
+# RUN apt-get update && apt-get install -y \
+#     python3-pip
+
+# #RUN install_packages libsystemd-dev
+# #RUN pip install balena-sdk
+
+# #RUN install_packages build-essential python3 python3-pip python3-setuptools \
+# #    python3-dev libffi-dev libssl-dev
+
+# # Install balena python SDK in python 3.
+# RUN pip3 install balena-sdk
+
+# # Here we want to copy in our test stuff
+# WORKDIR /usr/src/exclave
+# RUN cargo build
+
+# COPY . /usr/src/core
+
+# #COPY entry.sh /entry.sh
+# RUN chmod +x /usr/src/core/entry.sh
+# RUN chmod +x /usr/src/core/tests/bin/*.sh
+# RUN mkdir /usr/src/core/logs
+
+# ENTRYPOINT [ "/usr/src/core/entry.sh"]
