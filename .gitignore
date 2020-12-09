@@ -1,2 +1,3 @@
-wifi-connect-exclave/logic/node_modules
+wifi-connect-exclave/codecept/node_modules
 .balena/
+wifi-connect-exclave/logic/node_modules
