@@ -11,10 +11,13 @@
   ],
   "scripts": {},
   "dependencies": {
+    "@types/body-parser": "^1.19.0",
     "@types/express": "^4.17.9",
     "@types/node": "^10.12.18",
     "bluebird": "^3.7.2",
     "bluebird-retry": "^0.11.0",
+    "body-parser": "^1.19.0",
+    "dbus-native": "^0.4.0",
     "etcher-sdk": "^2.0.16",
     "express": "^4.17.1",
     "firmata": "^2.2.0",
