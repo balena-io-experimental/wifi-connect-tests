@@ -63,10 +63,8 @@ app.post('/connectAp', async (req, res) => {
     console.log('Connecting to Access Point!')
     console.log(req.body.ssid)
     if(req.body.ssid != null){
-        console.log(req.body.password)
         if(req.body.password != null){
-            console.log("Hola")
-            await connectToWifi({ iface: iface, ssid: req.body.ssid, password: req.body.ssid});
+            await connectToWifi({ iface: iface, ssid: req.body.ssid, password: req.body.password});
             res.send('Ok')
         }
     }
