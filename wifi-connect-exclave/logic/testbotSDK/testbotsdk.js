@@ -21,11 +21,10 @@ try {
 		await deviceInteractor.flashFromFile("/tmp/raspberrypi3.img");
 		
 		console.log(`Powering up DUT`)
-		await testbotHat.setVout(deviceInteractor.powerVoltage);
-		await testbotHat.powerOnDUT();
+		await deviceInteractor.powerOn();
 		
 		console.log(`Test successful`)
-		await testbotHat.teardown(true)
+		//await testbotHat.teardown(true)
 		return 0
 	}
 } catch(err) {
