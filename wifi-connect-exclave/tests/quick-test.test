@@ -1,0 +1,7 @@
+[Test]
+WorkingDirectory=/usr/src/core/logic/scripts
+ExecStart=./quick-test.sh
+Name=Quick test 1
+Description=Runs a quick test and reports some info to the console
+Timeout=90
+Type=simple
