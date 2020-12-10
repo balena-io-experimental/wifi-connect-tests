@@ -3,7 +3,6 @@ const { setHeadlessWhen } = require('@codeceptjs/configure');
 // turn on headless mode when running with HEADLESS=true environment variable
 // export HEADLESS=true && npx codeceptjs run
 setHeadlessWhen(process.env.HEADLESS);
-// setWindowSize(1980, 1080);
 
 exports.config = {
   tests: 'src/*_test.js',
@@ -20,7 +19,7 @@ exports.config = {
   },
   bootstrap: null,
   mocha: {},
-  name: 'Wifi-connct dahhboard testing',
+  name: 'codecept',
   plugins: {
     pauseOnFail: {},
     retryFailedStep: {
