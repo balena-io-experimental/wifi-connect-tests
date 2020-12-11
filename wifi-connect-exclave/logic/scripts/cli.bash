@@ -3,7 +3,7 @@ echo "Running test-01-cli..."
 # Clone the wifi connect repo (bash script)
 
 echo "git cloning..."
-git clone https://github.com/balena-io/wifi-connect.git ~/wifi-connect && cd ~/wifi-connect
+git clone https://github.com/balena-io/wifi-connect.git ~/wifi-connect && cd ~/wifi-connect || exit 1
 
 # Login into balenCloud Prod
 echo "balena login..."
@@ -27,7 +27,7 @@ balena push wifi-connect
 
 # Preload the configured OS image and pin the release to current (the release from the previous push command)
 echo "balena preload..."
-balena preload /tmp/raspberrypi3.img -a wifi-connect --pin-device-to-release -c current
+balena preload /tmp/raspberrypi3.img -a wifi-connect --pin-device-to-release -c current --debug
 
 # Push a second release to the wifi-connect app
 echo "balena push..."
