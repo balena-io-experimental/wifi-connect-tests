@@ -1,41 +1,67 @@
 # Fin image contains → 1 container (Exclave Testing) →  Exclave (requires rust), node, NPM, codecept, balenaSDK, testbotSDK, balenaCLI, credentials for the CLI and NPM token in secrets
 
+FROM debian:buster-slim
 
-#Ryan's past exclave Dockerfile
-FROM rust:1.31
+# build args (override with --build-arg NAME=VAL)
+ARG RUST_VERSION=1.31
+ARG NODE_VERSION=12.6.0
+ARG BALENA_CLI_VERSION=12.33.0
+ARG EXCLAVE_VERSION=v0.2.6
 
-RUN apt-get update 
-RUN apt-get install -y --no-install-recommends git ca-certificates wget
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+# set debconf to run non-interactively
+ENV DEBIAN_FRONTEND noninteractive
 
-ENV NODE_VERSION=12.6.0
-RUN apt install -y curl
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-ENV NVM_DIR=/root/.nvm
-RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
-RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
-RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
-ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
-RUN node --version
-RUN npm --version
+# hadolint ignore=DL3008
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        python \
+        git \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        git \
+        wget && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# set the SHELL option -o pipefail before RUN with a pipe in
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN git clone https://github.com/exclave/exclave /usr/src/exclave/ \
-    && cd /usr/src/exclave
-#    && git checkout v0.2.5
+# use the official docker-ce installer that only supports up to buster for now
+RUN curl -fsSL https://get.docker.com | bash
 
-RUN npm install balena-cli -g --production --unsafe-perm
+# overlay2 requires a docker volume for graph
+VOLUME /var/lib/docker
 
-# Here we want to copy in our test stuff
+# install nvm with node and npm
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+
+# add npm to path
+ENV PATH /root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}
+
+# install balena cli
+RUN npm install balena-cli@${BALENA_CLI_VERSION} -g --production --unsafe-perm
+
+# install rust
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y --default-toolchain ${RUST_VERSION}
+
+# add rust to path
+ENV PATH /root/.cargo/bin:${PATH}
+
 WORKDIR /usr/src/exclave
+
+# clone exclave
+RUN git clone https://github.com/exclave/exclave . && git checkout ${EXCLAVE_VERSION}
+
+# build exclave
 RUN cargo build
 
-COPY . /usr/src/core
+# copy source files
+COPY . /usr/src/core/
 
-RUN chmod +x /usr/src/core/entry.sh
-RUN chmod +x /usr/src/core/logic/scripts/*.sh
-RUN chmod +x /usr/src/core/logic/scripts/*.bash
+# enable execute permissions for scripts
+RUN chmod +x /usr/src/core/entry.sh && \
+    chmod +x /usr/src/core/logic/scripts/*.sh && \
+    chmod +x /usr/src/core/logic/scripts/*.bash
 
-
-#ENTRYPOINT [ "/usr/src/core/entry.sh"]
-CMD ["tail", "-f", "/dev/null"]
+ENTRYPOINT [ "/usr/src/core/entry.sh"]
