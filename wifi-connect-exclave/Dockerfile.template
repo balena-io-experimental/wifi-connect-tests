@@ -1,6 +1,7 @@
 # Fin image contains → 1 container (Exclave Testing) →  Exclave (requires rust), node, NPM, codecept, balenaSDK, testbotSDK, balenaCLI, credentials for the CLI and NPM token in secrets
 
-FROM debian:buster-slim
+# FROM debian:buster-slim
+FROM balenalib/fincm3-debian:run
 
 # build args (override with --build-arg NAME=VAL)
 ARG RUST_VERSION=1.31
@@ -10,6 +11,7 @@ ARG EXCLAVE_VERSION=v0.2.6
 
 # set debconf to run non-interactively
 ENV DEBIAN_FRONTEND noninteractive
+ENV UDEV=1
 
 # hadolint ignore=DL3008, added nano for debugging, remove in final build
 RUN apt-get update && \
@@ -67,4 +69,4 @@ RUN	chmod +x /usr/src/core/entry.sh && \
     chmod +x /usr/src/core/logic/scripts/*.sh && \
     chmod +x /usr/src/core/logic/scripts/*.bash
 
-ENTRYPOINT [ "/usr/src/core/entry.sh"]
+CMD ["/usr/src/core/entry.sh"]
