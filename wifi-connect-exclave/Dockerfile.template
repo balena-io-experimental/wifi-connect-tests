@@ -59,9 +59,11 @@ RUN git clone https://github.com/exclave/exclave . && \
 # copy source files
 COPY . /usr/src/core/
 
-# NPM install and enable execute permissions for scripts
-RUN npm install --prefix /usr/src/core/ && \
-    chmod +x /usr/src/core/entry.sh && \
+# NPM install
+RUN  res=0; ( cp /run/secrets/.npmrc /usr/src/core/ && npm install --prefix /usr/src/core/ ) || res=1; rm /usr/src/core/.npmrc; exit $res 
+
+#  enable execute permissions for scripts
+RUN	chmod +x /usr/src/core/entry.sh && \
     chmod +x /usr/src/core/logic/scripts/*.sh && \
     chmod +x /usr/src/core/logic/scripts/*.bash
 
