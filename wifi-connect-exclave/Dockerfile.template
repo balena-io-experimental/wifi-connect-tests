@@ -5,7 +5,7 @@ FROM debian:buster-slim
 # build args (override with --build-arg NAME=VAL)
 ARG RUST_VERSION=1.31
 ARG NODE_VERSION=12.6.0
-ARG BALENA_CLI_VERSION=12.33.0
+ARG BALENA_CLI_VERSION=12.32.0
 ARG EXCLAVE_VERSION=v0.2.6
 
 # set debconf to run non-interactively
