@@ -11,12 +11,13 @@ ARG EXCLAVE_VERSION=v0.2.6
 # set debconf to run non-interactively
 ENV DEBIAN_FRONTEND noninteractive
 
-# hadolint ignore=DL3008
+# hadolint ignore=DL3008, added nano for debugging, remove in final build
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         build-essential \
         python \
         git \
+        nano \
         apt-transport-https \
         ca-certificates \
         curl \
@@ -51,16 +52,16 @@ ENV PATH /root/.cargo/bin:${PATH}
 WORKDIR /usr/src/exclave
 
 # clone exclave
-RUN git clone https://github.com/exclave/exclave . && git checkout ${EXCLAVE_VERSION}
-
-# build exclave
-RUN cargo build
+RUN git clone https://github.com/exclave/exclave . && \
+    git checkout ${EXCLAVE_VERSION} && \
+    cargo build
 
 # copy source files
 COPY . /usr/src/core/
 
-# enable execute permissions for scripts
-RUN chmod +x /usr/src/core/entry.sh && \
+# NPM install and enable execute permissions for scripts
+RUN npm install --prefix /usr/src/core/ && \
+    chmod +x /usr/src/core/entry.sh && \
     chmod +x /usr/src/core/logic/scripts/*.sh && \
     chmod +x /usr/src/core/logic/scripts/*.bash
 
