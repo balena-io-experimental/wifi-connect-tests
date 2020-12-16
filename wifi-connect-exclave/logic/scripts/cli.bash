@@ -3,7 +3,10 @@ echo "Running test-01-cli..."
 # Clone the wifi connect repo (bash script)
 
 echo "git cloning..."
-git clone https://github.com/balena-io/wifi-connect.git ~/wifi-connect && cd ~/wifi-connect
+git clone https://github.com/balena-io/wifi-connect.git ~/wifi-connect
+
+echo "Changing Directories"
+cd ~/wifi-connect
 
 # Login into balenCloud Prod
 echo "balena login..."
