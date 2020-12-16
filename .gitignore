@@ -1,4 +1,6 @@
 wifi-connect-exclave/codecept/node_modules
-.balena/secrets/
 wifi-connect-exclave/logic/node_modules
 wifi-connect-exclave/codecept/output
+wifi-connect-exclave/nm/node_modules
+wifi-connect-exclave/node_modules
+.balena/secrets

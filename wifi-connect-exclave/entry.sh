@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+rm  -R /var/run/docker
+rm /var/run/docker.sock
+
 set -eu
 
 # https://docs.docker.com/engine/reference/commandline/dockerd/
