@@ -22,6 +22,7 @@ RUN apt-get update && \
         git \
         network-manager \
         nano \
+		chromium \
         apt-transport-https \
         ca-certificates \
         curl \
@@ -69,6 +70,7 @@ RUN  res=0; ( cp /run/secrets/.npmrc /usr/src/core/ && npm install --prefix /usr
 
 #  enable execute permissions for scripts
 RUN	chmod +x /usr/src/core/entry.sh && \
+	ln -s /usr/bin/chromium /usr/bin/chromium-browser && \
     chmod +x /usr/src/core/logic/scripts/*.sh && \
     chmod +x /usr/src/core/logic/scripts/*.bash
 
