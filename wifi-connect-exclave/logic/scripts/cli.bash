@@ -1,8 +1,9 @@
 #!/bin/bash
 echo "Running test-01-cli..."
 
-echo "Clean downloaded images and repositories"
-rm -rf ~/wifi-connect /tmp/raspberrypi3.img 
+# Holding fire on this, due to CLI flakiness
+# echo "Clean downloaded images and repositories"
+# rm -rf ~/wifi-connect /tmp/raspberrypi3.img 
 
 # Clone the wifi connect repo (bash script)
 echo "git cloning..."
