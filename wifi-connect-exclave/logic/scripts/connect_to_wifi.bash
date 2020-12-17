@@ -1,7 +1,17 @@
 #!/bin/bash
 
-#It takes time for wifi connect to become active - so we need to wait - or keep retrying if it fails
+#disconnect just for clean slate
+nmcli connection delete id "WiFi Connect"
 
-nmcli d wifi connect "WiFi Connect"
-
-# https://core.docs.ubuntu.com/en/stacks/network/network-manager/docs/configure-wifi-connections
+connected=0
+until [ $connected == 1 ]
+do
+    nmcli dev wifi
+    nmcli d wifi connect "WiFi Connect"
+    sleep 30s
+    if  nmcli | grep -q "WiFi Connect"; then
+        echo "Connected to WiFi Connect AP!"
+        connected=1
+        exit 0
+    fi
+done
