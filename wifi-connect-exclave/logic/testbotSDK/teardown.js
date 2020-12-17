@@ -15,20 +15,16 @@ const deviceInteractor = new RaspberryPi(testbotHat);
 console.log("running");
 try {
 	(async () => {
-		console.log(`Setting up DUT`);
-		await testbotHat.setup()
+		console.log(`Powering off DUT`)
+		await deviceInteractor.powerOff();
 
-		console.log(`Flashing the DUT`);
-		await deviceInteractor.flashFromFile("/tmp/raspberrypi3.img");
+		console.log(`Performing teardown`);
+		await testbotHat.teardown(true)
 
-		console.log(`Powering up DUT`)
-		await deviceInteractor.powerOn();
-
-		console.log(`Test successful`)
-		//await testbotHat.teardown(true)
+		console.log(`Teardown Successful`)
 		process.exit(0)
 	})()
 } catch(err) {
-	console.log(`Test Unsuccessful: ${err}`)
+	console.log(`Teardown unsuccessful: ${err}`)
 	process.exit(1)
 }

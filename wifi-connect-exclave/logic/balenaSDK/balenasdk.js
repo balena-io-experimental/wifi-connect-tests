@@ -18,7 +18,7 @@ try {
 					
 					if (status === "online") {
 						console.log(`Found an ${status} device named ${deviceName} running ${os}`)
-						return 0
+						process.exit(0)
 					}
 				}
 			}
@@ -26,5 +26,5 @@ try {
 	}
 } catch (err) {
 	console.log(`Test unsuccessful: ${err}`)
-	return 1
+	process.exit(0)
 }
