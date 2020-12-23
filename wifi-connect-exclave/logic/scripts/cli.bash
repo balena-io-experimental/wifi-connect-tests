@@ -1,6 +1,11 @@
 #!/bin/bash
 echo "Running test-01-cli..."
 
+# Notes
+# OS download gets stuck at 83% keep trying it you get it and turn on persistent logging to preserve images
+# Figure out how to manage ambigous applications error (When you have 2 apps with the same name due to orgs or just normally too)
+# Access token will expire in 7 days, need to take care of that.  
+
 # Holding fire on this, due to CLI flakiness
 # echo "Clean downloaded images and repositories"
 # rm -rf ~/wifi-connect /tmp/raspberrypi3.img 

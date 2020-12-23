@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 rm  -R /var/run/docker
 rm /var/run/docker.sock
 rm /var/run/docker.pid
