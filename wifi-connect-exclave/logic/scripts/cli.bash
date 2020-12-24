@@ -23,7 +23,7 @@ balena login --token "${CLI_API_KEY}"
 
 # Create a new empty app on your dashboard called wifi-connect (CLI).
 echo "balena app create..."
-balena app create wifi-connect -t raspberrypi3
+balena app create wifi-connect -t raspberrypi3 -o gh_rcooke_warwick
 
 # Download the OS variant to be tested to a temporary image file
 echo "balena OS download..."
