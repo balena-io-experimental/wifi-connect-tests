@@ -1,13 +1,14 @@
 const { getSdk } = require('balena-sdk');
+const os = require('os')
 
 const balena = getSdk({
 	apiUrl: "https://api.balena-cloud.com/",
-	dataDirectory: "NEED TO FIND WHERE THE TOKEN IS"
+	dataDirectory: os.userInfo().homedir + "/.balena"
 });
 
 try {
 	while (true) {
-		async () => {
+		(async () => {
 			const appsData = await sdk.models.application.getAllWithDeviceServiceDetails()
 			for (const appNumber in appsData) {
 				if (appsData[appNumber]["app_name"] === "wifi-connect") {
@@ -17,13 +18,13 @@ try {
 					
 					if (status === "online") {
 						console.log(`Found an ${status} device named ${deviceName} running ${os}`)
-						return 0
+						process.exit(0)
 					}
 				}
 			}
-		}
+		})()
 	}
 } catch (err) {
 	console.log(`Test unsuccessful: ${err}`)
-	return 1
+	process.exit(0)
 }

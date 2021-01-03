@@ -1,7 +1,16 @@
 #!/bin/bash
 echo "Running test-01-cli..."
-# Clone the wifi connect repo (bash script)
 
+# Notes
+# OS download gets stuck at 83% keep trying it you get it and turn on persistent logging to preserve images
+# Figure out how to manage ambigous applications error (When you have 2 apps with the same name due to orgs or just normally too)
+# Access token will expire in 7 days, need to take care of that.  
+
+# Holding fire on this, due to CLI flakiness
+# echo "Clean downloaded images and repositories"
+# rm -rf ~/wifi-connect /tmp/raspberrypi3.img 
+
+# Clone the wifi connect repo (bash script)
 echo "git cloning..."
 git clone https://github.com/balena-io/wifi-connect.git ~/wifi-connect
 
@@ -14,11 +23,11 @@ balena login --token "${CLI_API_KEY}"
 
 # Create a new empty app on your dashboard called wifi-connect (CLI).
 echo "balena app create..."
-balena app create wifi-connect -t raspberrypi3
+balena app create wifi-connect -t raspberrypi3 -o gh_rcooke_warwick
 
 # Download the OS variant to be tested to a temporary image file
 echo "balena OS download..."
-balena os download raspberrypi3 -o /tmp/raspberrypi3.img --version v2.58.3+rev1.prod
+balena os download raspberrypi3 -o /tmp/raspberrypi3.img --version v2.58.3+rev1.prod || exit 1
 
 # Configure the OS image and add the image to the wifi-connect app with ETHERNET ONLY
 echo "balena OS configure..."
@@ -33,7 +42,7 @@ echo "balena preload..."
 balena preload /tmp/raspberrypi3.img -a wifi-connect --pin-device-to-release -c current -P /var/run/docker.sock  --debug
 
 # Push a second release to the wifi-connect app
-echo "balena push..."
+echo "balena push #2..."
 balena push wifi-connect
 
 exit 0

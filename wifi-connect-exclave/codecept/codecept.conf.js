@@ -21,6 +21,9 @@ exports.config = {
   mocha: {},
   name: 'codecept',
   plugins: {
+	retryFailedStep: {
+		enabled: true
+	},
     pauseOnFail: {},
     retryFailedStep: {
       enabled: true
