@@ -1,7 +1,0 @@
-[Test]
-WorkingDirectory=/usr/src/core/logic/codecept
-ExecStart=npm run codeceptjs:headless
-Name=Provision test
-Description=Provisions and flashes the DUT
-Type=simple
-Requires=test-02-provision

@@ -1,7 +1,0 @@
-[Test]
-WorkingDirectory=/usr/src/core/logic/scripts
-ExecStart=./cli.bash
-Name=Get image ready
-Description=Runs a quick test and reports some info to the console
-Timeout=9000
-Type=simple

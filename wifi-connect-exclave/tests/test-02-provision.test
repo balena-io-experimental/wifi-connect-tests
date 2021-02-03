@@ -1,7 +1,0 @@
-[Test]
-WorkingDirectory=/usr/src/core/logic/testbotSDK
-ExecStart=node testbotsdk.js
-Name=Provision test
-Description=Provisions and flashes the DUT
-Type=simple
-Requires=test-01-cli
