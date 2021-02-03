@@ -1,0 +1,5 @@
+[Scenario]
+Name=Wifi Connect Test Scenario
+Description=quick test inside container
+Tests=wifi-connect
+Timeout=5000

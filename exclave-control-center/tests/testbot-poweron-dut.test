@@ -1,0 +1,6 @@
+[Test]
+WorkingDirectory=/usr/src/core/logic/balenaSDK
+ExecStart=/bin/bash -c "curl -X GET testblockbot:5001/on; node devicefinder.js; source /root/.bashrc"
+Name=Power On the DUT
+Requires=testbot-flash-dut, balena-os-configure
+Type=simple

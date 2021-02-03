@@ -1,0 +1,3 @@
+[Logger]
+Format=tsv
+ExecStart=/usr/src/core/logic/scripts/logger.sh

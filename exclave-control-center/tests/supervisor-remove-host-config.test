@@ -1,0 +1,6 @@
+[Test]
+WorkingDirectory=/usr/src/core/logic/scripts
+ExecStart=./supervisor-remove-host-config.sh
+Name=Removing Host Config from the DUT
+Requires=glider-logs-check
+Type=simple

@@ -1,0 +1,4 @@
+[Test]
+ExecStart=/bin/bash -c "balena login --token "${CLI_API_KEY}""
+Name=balena login with token
+Type=simple

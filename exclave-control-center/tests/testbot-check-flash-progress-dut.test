@@ -1,0 +1,5 @@
+[Test]
+ExecStart=curl -X GET testblockbot:5001/flash-progress
+Name=Check on flashing status of the DUT
+Description=This needs regular polling of the /flash-progress endpoint after the /flash endpoint is triggered to check status of flashing.
+Type=simple

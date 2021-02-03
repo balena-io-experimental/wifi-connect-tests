@@ -1,0 +1,6 @@
+[Test]
+WorkingDirectory=/usr/src/core/logic/scripts
+ExecStart=./check-flash-progress.sh
+Name=Flash the DUT
+Requires=balena-os-configure, testbot-poweroff-dut
+Type=simple

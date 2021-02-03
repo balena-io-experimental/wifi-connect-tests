@@ -1,0 +1,5 @@
+[Test]s
+ExecStart=balena preload /images/raspberrypi3.img -a wifi-connect --pin-device-to-release -c current -P /var/run/docker.sock --debug
+Name=balena-preload
+Requires=balena-push-with-clone
+Type=simple

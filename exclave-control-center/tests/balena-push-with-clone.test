@@ -1,0 +1,5 @@
+[Test]
+ExecStart=/bin/bash -c "git clone https://github.com/balena-io/wifi-connect.git ~/wifi-connect; cd ~/wifi-connect; balena push wifi-connect"
+Name=balena push with clone
+Requires=balena-os-configure
+Type=simple

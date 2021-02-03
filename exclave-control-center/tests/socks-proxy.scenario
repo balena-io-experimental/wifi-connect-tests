@@ -1,0 +1,5 @@
+[Scenario]
+Name=Socks5 Proxy Test!
+Description=quick test inside container
+Tests=supervisor-add-host-config, sdk-reboot-dut, glider-logs-check, supervisor-remove-host-config, balena-device-reboot
+Timeout=5000

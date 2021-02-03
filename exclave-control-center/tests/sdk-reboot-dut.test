@@ -1,0 +1,6 @@
+[Test]
+WorkingDirectory=/usr/src/core/logic/balenaSDK
+ExecStart=/bin/bash -c "source /root/.bashrc; node reboot.js; node devicefinder.js"
+Name=Reboot the DUT through balenaSDK
+Requires=supervisor-add-host-config
+Type=simple

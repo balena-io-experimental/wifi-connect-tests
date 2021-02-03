@@ -1,0 +1,6 @@
+[Test]
+WorkingDirectory=/usr/src/core/logic/scripts
+ExecStart=./glider-logs-check.sh
+Requires=sdk-reboot-dut
+Name=Check Glider Logs
+Type=simple

@@ -1,0 +1,4 @@
+[Test]
+ExecStart=curl -X GET testblockbot:5001/teardown
+Name=Setup the DUT
+Type=simple
