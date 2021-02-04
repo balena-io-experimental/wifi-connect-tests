@@ -15,3 +15,5 @@ do
         exit 0
     fi
 done
+
+npm run codeceptjs:headless

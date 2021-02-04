@@ -1,0 +1,5 @@
+[Test]
+ExecStart=balena push wifi-connect
+Name=balena push
+Requires=balena-preload
+Type=simple

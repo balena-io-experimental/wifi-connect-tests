@@ -1,0 +1,6 @@
+[Test]
+WorkingDirectory=/usr/src/core/logic/scripts
+ExecStart=./wifi-connect.sh
+Name=Wifi Connect test
+Requires=testbot-poweron-dut
+Type=simple

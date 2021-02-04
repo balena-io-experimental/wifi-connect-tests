@@ -10,12 +10,6 @@ echo "Running test-01-cli..."
 # echo "Clean downloaded images and repositories"
 # rm -rf ~/wifi-connect /tmp/raspberrypi3.img 
 
-# Clone the wifi connect repo (bash script)
-echo "git cloning..."
-git clone https://github.com/balena-io/wifi-connect.git ~/wifi-connect
-
-echo "Changing Directories"
-cd ~/wifi-connect
 
 # Login into balenCloud Prod
 echo "balena login..."
@@ -34,6 +28,13 @@ echo "balena OS configure..."
 balena os configure /tmp/raspberrypi3.img -a wifi-connect --config-network ethernet
 
 # Push one release to the wifi-connect app
+# Clone the wifi connect repo (bash script)
+echo "git cloning..."
+git clone https://github.com/balena-io/wifi-connect.git ~/wifi-connect
+
+echo "Changing Directories"
+cd ~/wifi-connect
+
 echo "balena push..."
 balena push wifi-connect
 

@@ -1,0 +1,6 @@
+[Test]
+WorkingDirectory=/usr/src/core/logic/scripts
+ExecStart=./supervisor-add-host-config.sh
+Name=Configuring Host Config of the DUT for the proxy
+Requires=testbot-poweron-dut
+Type=simple

@@ -9,7 +9,7 @@ const balena = getSdk({
 try {
 	while (true) {
 		(async () => {
-			const appsData = await sdk.models.application.getAllWithDeviceServiceDetails()
+			const appsData = await balena.models.application.getAllWithDeviceServiceDetails()
 			for (const appNumber in appsData) {
 				if (appsData[appNumber]["app_name"] === "wifi-connect") {
 					const deviceName = appsData[appNumber]["owns__device"][0]["device_name"]

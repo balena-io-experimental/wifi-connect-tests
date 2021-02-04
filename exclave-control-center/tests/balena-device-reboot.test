@@ -1,0 +1,6 @@
+[Test]
+WorkingDirectory=/usr/src/core/logic/balenaSDK
+ExecStart=/bin/bash -c "source /root/.bashrc; echo 'Rebooting DUT'; balena device reboot "${DUT_UUID}" ; sleep 10; node devicefinder.js"
+Name=balena reboot
+Requires=supervisor-remove-host-config
+Type=simple

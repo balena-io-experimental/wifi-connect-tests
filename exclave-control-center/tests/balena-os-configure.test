@@ -1,0 +1,6 @@
+[Test]
+ExecStart=balena os configure /images/raspberrypi3.img -a socks-device --config-network wifi ethernet
+Name=balena os configure
+Requires=balena-login, balena-os-download
+Suggests=balena-app-create
+Type=simple

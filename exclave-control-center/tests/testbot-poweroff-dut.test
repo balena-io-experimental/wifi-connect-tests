@@ -1,0 +1,4 @@
+[Test]
+ExecStart=curl -X GET testblockbot:5001/off
+Name=Power OFF the DUT
+Type=simple

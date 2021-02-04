@@ -1,0 +1,5 @@
+[Test]
+ExecStart=balena app create wifi-connect -o gh_vipulgupta2048 -t raspberrypi3
+Requires=balena-login
+Name=balena app create
+Type=simple

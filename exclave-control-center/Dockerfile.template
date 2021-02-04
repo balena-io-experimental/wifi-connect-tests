@@ -5,8 +5,7 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-node:12-buster-run
 
 # build args (override with --build-arg NAME=VAL)
 ARG RUST_VERSION=1.31
-# ARG NODE_VERSION=12.6.0
-ARG BALENA_CLI_VERSION=12.32.0
+ARG BALENA_CLI_VERSION=12.37.0
 ARG EXCLAVE_VERSION=v0.2.6
 
 # set debconf to run non-interactively
@@ -49,15 +48,17 @@ ENV PATH /root/.cargo/bin:${PATH}
 WORKDIR /usr/src/exclave
 
 # clone exclave
-RUN git clone https://github.com/exclave/exclave . && \
+RUN git clone https://github.com/balena-io-playground/exclave . && \
     git checkout ${EXCLAVE_VERSION} && \
     cargo build
 
+COPY package* /usr/src/core/
+
+# NPM install 
+RUN npm install
+
 # copy source files
 COPY . /usr/src/core/
-
-# NPM install (Don't merge this RUN line, took me hours of debugging to see what was going wrong when it was paired up)
-RUN res=0; ( cp /run/secrets/.npmrc /usr/src/core/ && npm install --prefix /usr/src/core/ ) || res=1; rm /usr/src/core/.npmrc; exit $res 
 
 # enable execute permissions for scripts 
 RUN chmod +x /usr/src/core/entry.sh && \
@@ -65,3 +66,6 @@ RUN chmod +x /usr/src/core/entry.sh && \
     chmod +x /usr/src/core/logic/scripts/*.bash
 
 CMD ["/usr/src/core/entry.sh"]
+
+VOLUME /images
+VOLUME /root/.balena/cache/

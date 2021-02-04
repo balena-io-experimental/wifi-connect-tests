@@ -1,6 +1,0 @@
-[Jig]
-Name=Dev Jig
-Description=Development Jig 
-TestFile=/etc
-DefaultScenario=wifi-connect
-DefaultWorkingDirectory=./
