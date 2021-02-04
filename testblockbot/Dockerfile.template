@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 ENV UDEV=1
 COPY package.json .
 
-RUN  res=0; ( cp /run/secrets/.npmrc . && npm install ) || res=1; rm .npmrc; exit $res
+RUN npm install
 
 # --- Result image ---
 
